@@ -3,30 +3,31 @@ from pathlib import Path
 from classes.inventory_manager import InventoryManager
 
 def item_valid_checker(name, price=None, quantity=None):
+    ret = True
     if len(name) < 1:
         print("\nName not valid.\n")
-        return False
+        ret = False
     if price != None:
         try:
             float(price)
         except ValueError:
             print("\nPrice not valid.\n")
-            return False
+            ret = False
         else:
             if float(price) < 0:
                 print("\nPrice not valid.\n")
-                return False
+                ret = False
     if quantity != None:
         try:
             float(quantity)
         except ValueError:
             print("\nQuantity not valid.\n")
-            return False
+            ret = False
         else:
             if float(quantity) < 0 or float(quantity).is_integer() == False:
                 print("\nQuantity not valid.\n")
-                return False
-    return True
+                ret = False
+    return ret
 
 def add_item(inventory_manager):
     name = input("Name of item: ")
@@ -89,7 +90,6 @@ def save_file(inventory_manager):
 
 def main_menu(inventory_manager):
     while True:
-        # print(inventory_manager.inventory)
         mm_input = input("\nEnter command:\n\nAdd item[a]\nUpdate item[u]\nDelete item[d]\nPrint data[p]\nSave file[s]\nQuit[q]: ")
         print()
         if (mm_input.lower()) == "q":
