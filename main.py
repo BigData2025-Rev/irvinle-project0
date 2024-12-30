@@ -125,5 +125,4 @@ if __name__ == "__main__":
                 inventory = json.load(file)
             im = InventoryManager(filepath, inventory)
 
-        print()
         main_menu(im)
